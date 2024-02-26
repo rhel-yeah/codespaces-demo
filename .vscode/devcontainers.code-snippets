@@ -1,0 +1,11 @@
+{
+	"VS Code extensions":{
+		"prefix": "extn",
+		"body":[
+"\"ms-azuretools.vscode-docker\",",
+"\"ms-vscode-remote.remote-containers\",",
+"\"ms-vscode-remote.remote-ssh\""
+		],
+		"description": "Adding my favorite VS Code extensions"
+	}
+}

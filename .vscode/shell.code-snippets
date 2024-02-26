@@ -1,0 +1,24 @@
+{
+"Aliases":{
+	"prefix": "aliases",
+	"body":[
+
+	],
+	"description": "Aliases for shell commands"
+},
+"Git Aliases":{
+	"prefix": "gita",
+	"body":[
+		"alias gs='git status'",
+		"alias ga2='git add'",
+		"alias gcb='git branch'",
+		"alias gcm='git commit -m'",
+		"alias gd='git diff'",
+		"alias gco='git checkout'",
+		"alias gk='gitk --all&'",
+		"alias gx='gitx --all'"
+	],
+	"description": "Aliases for git commands"
+}
+}
+}
