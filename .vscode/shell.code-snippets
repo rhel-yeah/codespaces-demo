@@ -16,7 +16,9 @@
 		"alias gd='git diff'",
 		"alias gco='git checkout'",
 		"alias gk='gitk --all&'",
-		"alias gx='gitx --all'"
+		"alias gx='gitx --all'",
+		"alias gp='git pull'",
+		"alias gpa='git push && git push --tags'"
 	],
 	"description": "Aliases for git commands"
 }
