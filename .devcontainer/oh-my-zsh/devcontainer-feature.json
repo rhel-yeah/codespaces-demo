@@ -1,0 +1,6 @@
+{
+    "id": "oh-my-zsh-plus",
+    "version": "0.0.1",
+    "description": "Installs oh-my-zsh and Powerlevel10k along with a nifty theme",
+    "postCreateCommand": "wget https://raw.githubusercontent.com/jgarverick/api-devex-demo/main/.devcontainer/p10k.zsh -O ~/.p10k.zsh"
+}
