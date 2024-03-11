@@ -13,5 +13,5 @@
     "features": {
         "./pre-commit":{}
     },
-    "postCreateCommand": "chmod +x ./.devcontainer/post-create.sh && ./.devcontainer/post-create.sh"
+    "postCreateCommand": "source ./.devcontainer/aliases.sh && chmod +x ./.devcontainer/post-create.sh && ./.devcontainer/post-create.sh"
 }

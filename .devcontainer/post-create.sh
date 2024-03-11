@@ -9,7 +9,6 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 
 echo '[INFO] Setting up git aliases...'
 git config --global alias.lol "log --oneline --graph --decorate --all"
-source ./.devcontainer/aliases.sh
 echo '[INFO] Do not forget to set your user name and email in the git config!'
 
 echo '[INFO] Copying p10k.zsh...'
