@@ -11,7 +11,7 @@
         }
     },
     "features": {
-        "./pre-commit":{}
+        "ghcr.io/rhel-yeah/features/pre-commit":{}
     },
     "postCreateCommand": "source ./.devcontainer/aliases.sh && chmod +x ./.devcontainer/post-create.sh && ./.devcontainer/post-create.sh"
 }
