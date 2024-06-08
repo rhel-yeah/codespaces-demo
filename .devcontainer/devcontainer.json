@@ -1,10 +1,10 @@
 {
     "name": "UBI9",
-    "dockerFile": "Dockerfile",
+    "image": "ghcr.io/rhel-yeah/ubi-nosub:rhel-7",
     "customizations": {
         "vscode": {
             "settings": {
-                "terminal.integrated.shell.linux": "/bin/zsh"
+                "terminal.integrated.shell.linux": "/bin/bash"
             },
             "extensions": [
 				"ms-vscode.cpptools-extension-pack",

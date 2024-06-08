@@ -25,6 +25,5 @@ ARG USER_GID=$USER_UID
 
 RUN yum update -y && yum install git sudo wget zsh -y
 RUN groupadd -g 911 sudo
-RUN useradd -G sudo -ms /bin/zsh vscode
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER vscode
