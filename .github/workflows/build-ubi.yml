@@ -15,6 +15,7 @@ jobs:
     strategy:
       matrix:
         rhel_version: [7, 8, 9]
+        architecture: [amd64, arm64, armv7]
 
     steps:
       - name: Check out repository
@@ -34,6 +35,7 @@ jobs:
           tags: ghcr.io/${{ github.repository_owner }}/ubi-nosub:rhel-${{ matrix.rhel_version }}
           build-args: |
             RHEL_VERSION=${{ matrix.rhel_version }}
-
+            ARCH=${{ matrix.architecture }}
+            
       - name: Post build cleanup
         run: docker system prune -f

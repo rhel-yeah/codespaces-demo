@@ -1,8 +1,9 @@
 #!/bin/bash
-
+if [ -z "exec"]; then
 echo '[INFO] Setting up zsh as default shell...'
 echo 'export SHELL=`which zsh`' >> ~/.bashrc
 echo '[ -z "$ZSH_VERSION" ] && exec "$SHELL" -l' >> ~/.bashrc
+fi
 
 echo '[INFO] Setting up Powerlevel10k...'
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k

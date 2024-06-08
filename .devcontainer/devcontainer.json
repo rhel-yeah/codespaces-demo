@@ -1,6 +1,6 @@
 {
     "name": "UBI9",
-    "image": "ghcr.io/rhel-yeah/ubi-nosub:rhel-7",
+    "image": "ghcr.io/rhel-yeah/ubi-nosub:rhel-8",
     "customizations": {
         "vscode": {
             "settings": {
