@@ -1,7 +1,7 @@
 
 ARG RHEL_VERSION=8
-ARG ARCH=amd64
-FROM registry.access.redhat.com/ubi${RHEL_VERSION}/ubi:${ARCH}
+
+FROM registry.access.redhat.com/ubi${RHEL_VERSION}/ubi:latest
 ARG RHEL_VERSION
 
 RUN yum install -y "https://dl.fedoraproject.org/pub/epel/epel-release-latest-${RHEL_VERSION}.noarch.rpm" && \
