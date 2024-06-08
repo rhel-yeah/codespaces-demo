@@ -2,9 +2,9 @@
 ARG RHEL_VERSION=8
 FROM registry.access.redhat.com/ubi${RHEL_VERSION}/ubi:latest
 ARG RHEL_VERSION
-RUN dnf install -y gcc-toolset-12 && scl enable gcc-toolset-12 bash
-RUN dnf install -y "https://dl.fedoraproject.org/pub/epel/epel-release-latest-${RHEL_VERSION}.noarch.rpm" && \
-dnf install -y "https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-${RHEL_VERSION}.noarch.rpm"
+RUN yum install -y gcc-toolset-12 && scl enable gcc-toolset-12 bash
+RUN yum install -y "https://dl.fedoraproject.org/pub/epel/epel-release-latest-${RHEL_VERSION}.noarch.rpm" && \
+yum install -y "https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-${RHEL_VERSION}.noarch.rpm"
 
 RUN sed -i 's/\(def in_container():\)/\1\n    return False/g' /usr/lib64/python*/*-packages/rhsm/config.py
 RUN yum update -y && yum install bash gdb strace git yum-utils -y
