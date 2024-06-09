@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -z "exec"]; then
+if command -v exec >/dev/null 2>&1; then
 echo '[INFO] Setting up zsh as default shell...'
 echo 'export SHELL=`which zsh`' >> ~/.bashrc
 echo '[ -z "$ZSH_VERSION" ] && exec "$SHELL" -l' >> ~/.bashrc
