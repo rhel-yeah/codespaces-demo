@@ -12,3 +12,4 @@ alias gp='git pull'
 alias gpa='git push && git push --tags'
 
 alias pcra='pre-commit run -a'
+alias gh_whoami='gh api user --jq ".login"'

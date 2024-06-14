@@ -32,6 +32,7 @@ jobs:
         with:
           context: ./.devcontainer
           push: true
+          
           tags: ghcr.io/${{ github.repository_owner }}/ubi-nosub:rhel-${{ matrix.rhel_version }}
           build-args: |
             RHEL_VERSION=${{ matrix.rhel_version }}
