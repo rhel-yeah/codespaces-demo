@@ -30,4 +30,6 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 RUN yum config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo && \
 yum -y install gh
+# Disable subscription manager
+RUN sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/subscription-manager.conf
 USER vscode
