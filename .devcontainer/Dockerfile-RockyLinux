@@ -7,7 +7,7 @@ ARG RHEL_VERSION
 RUN yum install -y "https://dl.fedoraproject.org/pub/epel/epel-release-latest-${RHEL_VERSION}.noarch.rpm" && \
 yum install -y "https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-${RHEL_VERSION}.noarch.rpm"
 
-RUN sed -i 's/\(def in_container():\)/\1\n    return False/g' /usr/lib64/python*/*-packages/rhsm/config.py
+# RUN sed -i 's/\(def in_container():\)/\1\n    return False/g' /usr/lib64/python*/*-packages/rhsm/config.py
 RUN yum update -y && yum install bash gdb strace git yum-utils -y
 # Install development tools and createrepo
 RUN yum -y update && \
@@ -28,6 +28,4 @@ RUN yum update -y && yum install git sudo wget zsh -y
 RUN groupadd -g 911 sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# Disable subscription manager
-RUN sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/subscription-manager.conf
 USER vscode
