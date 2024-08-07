@@ -1,6 +1,6 @@
 {
     "name": "UBI9",
-    "image": "ghcr.io/rhel-yeah/ubi-nosub:rhel-9",
+    "image": "rockylinux:9",
     "customizations": {
         "vscode": {
             "settings": {
@@ -26,7 +26,7 @@
 	},
     "privileged":true,
 
-    "postCreateCommand": "sudo sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/subscription-manager.conf && chmod a+x ./.devcontainer/post-create.sh && ./.devcontainer/post-create.sh",
+    "postCreateCommand": "chmod a+x ./.devcontainer/post-create.sh && ./.devcontainer/post-create.sh",
   
     "remoteUser": "vscode"
 }
