@@ -1,7 +1,7 @@
 
 FROM fedora:latest
 
-RUN dnf install 'dnf-command(config-manager)' && \
+RUN dnf install -y 'dnf-command(config-manager)' && \
 dnf install -y "https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm"
 
 # RUN sed -i 's/\(def in_container():\)/\1\n    return False/g' /usr/lib64/python*/*-packages/rhsm/config.py
