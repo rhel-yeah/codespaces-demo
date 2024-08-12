@@ -38,6 +38,7 @@ jobs:
           tags: ghcr.io/${{ github.repository_owner }}/devcontainer-rhelyeah:rocky-${{ matrix.rhel_version }}
           build-args: |
             RHEL_VERSION=${{ matrix.rhel_version }}
+            CONFIG_PACKAGE=${{ matrix.rhel_version == 9 ? "crb" : "powertools" }}
 
       - name: Post build cleanup
         run: docker system prune -f
