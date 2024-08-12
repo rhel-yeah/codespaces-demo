@@ -3,8 +3,12 @@ ARG RHEL_VERSION=8
 
 FROM rockylinux:${RHEL_VERSION}
 ARG RHEL_VERSION
+ARG CONFIG_PACKAGE="crb"
+RUN if [ "${RHEL_VERSION}" == "8"]; then \
+    CONFIG_PACKAGE="powertools" \
+    fi
 
-RUN dnf install -y 'dnf-command(config-manager)' && dnf config-manager --set-enabled crb && \
+RUN dnf install -y 'dnf-command(config-manager)' && dnf config-manager --set-enabled ${CONFIG_PACKAGE} && \
 dnf install https://dl.fedoraproject.org/pub/epel/epel{,-next}-release-latest-9.noarch.rpm && \
 dnf install -y "https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm"
 
