@@ -30,6 +30,7 @@ jobs:
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
+        if: matrix.rhel_version == 9
         with:
           context: ./.devcontainer
           file: ./.devcontainer/Dockerfile-RockyLinux
@@ -38,7 +39,20 @@ jobs:
           tags: ghcr.io/${{ github.repository_owner }}/devcontainer-rhelyeah:rocky-${{ matrix.rhel_version }}
           build-args: |
             RHEL_VERSION=${{ matrix.rhel_version }}
-            CONFIG_PACKAGE=${{ matrix.rhel_version == 9 ? "crb" : "powertools" }}
+            CONFIG_PACKAGE=crb
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        if: matrix.rhel_version == 8
+        with:
+          context: ./.devcontainer
+          file: ./.devcontainer/Dockerfile-RockyLinux
+          push: true
+          
+          tags: ghcr.io/${{ github.repository_owner }}/devcontainer-rhelyeah:rocky-${{ matrix.rhel_version }}
+          build-args: |
+            RHEL_VERSION=${{ matrix.rhel_version }}
+            CONFIG_PACKAGE=powertools
 
       - name: Post build cleanup
         run: docker system prune -f
