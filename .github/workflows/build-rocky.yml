@@ -46,8 +46,8 @@ jobs:
         uses: docker/build-push-action@v4
         if: matrix.rhel_version == 8
         with:
-          context: ./.devcontainer
-          file: ./.devcontainer/Dockerfile-RockyLinux
+          context: ./.devcontainer/RockyLinux
+          file: ./.devcontainer/RockyLinux/Dockerfile
           push: true
           
           tags: ghcr.io/${{ github.repository_owner }}/devcontainer-rhelyeah:rocky-${{ matrix.rhel_version }}
