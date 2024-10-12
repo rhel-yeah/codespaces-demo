@@ -38,5 +38,19 @@ jobs:
           build-args: |
             RHEL_VERSION=${{ matrix.rhel_version }}
 
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
+        with:
+          image-ref: 'ghcr.io/${{ github.repository_owner }}/devcontainer-rhelyeah:rhel-${{ matrix.rhel_version }}'
+          format: 'template'
+          template: '@/contrib/sarif.tpl'
+          output: 'trivy-results-rhel-${{ matrix.rhel_version}}.sarif'
+          severity: 'CRITICAL,HIGH'
+          
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results-rhel-${{ matrix.rhel_version}}.sarif'
+      
       - name: Post build cleanup
         run: docker system prune -f
