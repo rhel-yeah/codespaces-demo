@@ -27,8 +27,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./.devcontainer
-          file: ./.devcontainer/Dockerfile-Fedora
+          context: ./.devcontainer/Fedora
+          file: ./.devcontainer/Fedora/Dockerfile
           push: true
           
           tags: ghcr.io/${{ github.repository_owner }}/devcontainer-rhelyeah:fedora-latest
