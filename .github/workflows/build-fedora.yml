@@ -35,6 +35,8 @@ jobs:
           tags: ghcr.io/${{ github.repository_owner }}/devcontainer-rhelyeah:fedora-latest
 
       - name: Run Trivy vulnerability scanner
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
         with:
           image-ref: 'ghcr.io/${{ github.repository_owner }}/devcontainer-rhelyeah:fedora-latest'
