@@ -61,9 +61,11 @@ jobs:
         with:
           image-ref: 'ghcr.io/${{ github.repository_owner }}/devcontainer-rhelyeah:rocky-${{ matrix.rhel_version }}'
           format: 'template'
+          cache: 'true'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results-rocky-${{ matrix.rhel_version}}.sarif'
           severity: 'CRITICAL,HIGH'
+          
       
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
