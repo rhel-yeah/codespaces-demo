@@ -69,7 +69,6 @@ jobs:
           image-ref: 'ghcr.io/${{ github.repository_owner }}/devcontainer-rhelyeah:rocky-${{ matrix.rhel_version }}'
           format: 'template'
           template: '@/contrib/sarif.tpl'
-          skip-setup-trivy: true
           output: 'trivy-results-rocky-${{ matrix.rhel_version}}.sarif'
           severity: 'CRITICAL,HIGH'
           token-setup-trivy: ${{ secrets.GITHUB_TOKEN }}
