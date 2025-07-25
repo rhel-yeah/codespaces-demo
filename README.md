@@ -43,7 +43,11 @@ The `.devcontainer/Dockerfile` builds the development container image. It instal
 
 ### GitHub Actions Workflow
 
-The `.github/workflows/build-ubi.yml` workflow builds and pushes Docker images to the GitHub Container Registry. It supports building images for RHEL 8 and 9 and runs daily at 00:00 UTC.
+The `.github/workflows/` directory contains the following workflows:
+
+- `build-ubi.yml`: Builds and pushes Docker images for RHEL 8 and 9 to the GitHub Container Registry. Runs daily at 00:00 UTC.
+- `build-fedora.yml`: Builds and pushes Docker images for Fedora-based environments.
+- `build-rocky.yml`: Builds and pushes Docker images for Rocky Linux-based environments.
 
 ### Pre-commit Hooks
 
