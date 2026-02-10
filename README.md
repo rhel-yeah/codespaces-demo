@@ -1,65 +1,50 @@
 # Codespaces Demo (RHEL)
 
-Demo of configuring CodeSpaces for use with RHEL universal base images (UBI).
+Demo of configuring GitHub Codespaces for Red Hat Enterprise Linux (RHEL) UBI and companion base images.
 
 ## Overview
 
-This repository provides a setup for using GitHub Codespaces with Red Hat Enterprise Linux (RHEL) Universal Base Images (UBI). It includes configurations for Docker, VS Code, and GitHub Actions workflows to streamline development in a containerized environment.
+This repo ships a Codespaces-ready devcontainer plus CI workflows that build and publish container images for RHEL UBI, Rocky Linux, and Fedora variants. Use it as a template for RHEL-flavored development environments or as a reference for shipping pre-built devcontainer images to GHCR.
 
-## Repository Structure
+## Quickstart (Codespaces)
 
-- `.devcontainer/`
-  - `aliases.sh`: Shell aliases for the development container.
-  - `devcontainer.json`: Configuration file for the development container.
-  - `Dockerfile`: Dockerfile to build the development container image.
-  - `p10k.zsh`: Configuration for the Powerlevel10k theme in Zsh.
-  - `post-create.sh`: Script to run after the container is created.
+1. Create a Codespace on the main branch.
+2. The devcontainer defined in [.devcontainer/devcontainer.json](.devcontainer/devcontainer.json) will boot automatically using a `rockylinux:9` base image.
+3. Post-create tasks in [.devcontainer/post-create.sh](.devcontainer/post-create.sh) make Zsh the default shell, install Powerlevel10k, and add git aliases from [.devcontainer/aliases.sh](.devcontainer/aliases.sh).
+4. Start coding—common VS Code extensions (C/C++, Docker, Makefile tools, Copilot Chat, Remote Containers) are preinstalled.
 
-- `.github/`
-  - `workflows/`
-    - `build-ubi.yml`: GitHub Actions workflow to build and push Docker images.
+## Devcontainer details
 
-- `.vscode/`
-  - `devcontainers.code-snippets`: Code snippets for development containers.
-  - `rhel-yeah.code-workspace`: VS Code workspace configuration.
-  - `shell.code-snippets`: Shell script snippets.
+- Base image: `rockylinux:9` (override by building your own image with the Dockerfiles below).
+- Features: common-utils with Zsh, `vscode` user, package upgrades.
+- Extensions: listed in [.devcontainer/devcontainer.json](.devcontainer/devcontainer.json).
+- Shell setup: Powerlevel10k theme and git aliases via [.devcontainer/post-create.sh](.devcontainer/post-create.sh) and [.devcontainer/aliases.sh](.devcontainer/aliases.sh).
 
-- `.gitignore`: Git ignore file.
-- `.pre-commit-config.yaml`: Configuration for pre-commit hooks.
-- `LICENSE`: License file.
-- `README.md`: This documentation file.
+### Building images locally
 
-## Development Container
+- RHEL UBI image: built from [.devcontainer/Dockerfile](.devcontainer/Dockerfile); pick a major version via `RHEL_VERSION` (8/9/10).
 
-The development container is configured using the `.devcontainer/devcontainer.json` file. It uses a custom Docker image based on RHEL UBI 8/9. Key features include:
+```sh
+docker build -f .devcontainer/Dockerfile --build-arg RHEL_VERSION=9 -t ghcr.io/<owner>/devcontainer-rhelyeah:rhel-9 .devcontainer
+```
 
-- Custom VS Code settings and extensions.
-- Installation of Zsh and other utilities.
-- Post-create script to disable subscription manager and perform additional setup.
+- Rocky Linux variants live under [.devcontainer/RockyLinux](.devcontainer/RockyLinux) and Fedora under [.devcontainer/Fedora](.devcontainer/Fedora).
 
-### Dockerfile
+## CI workflows (GHCR publishing)
 
-The `.devcontainer/Dockerfile` builds the development container image. It installs necessary development tools and configures the environment for non-root user `vscode`.
+- RHEL UBI: [.github/workflows/build-ubi.yml](.github/workflows/build-ubi.yml) builds tags `rhel-8`, `rhel-9`, `rhel-10`, scans with Trivy, and uploads SARIF results daily at 00:00 UTC.
+- Rocky Linux: [.github/workflows/build-rocky.yml](.github/workflows/build-rocky.yml) builds Rocky 8/9/10 images with appropriate repositories enabled (`powertools` for 8, `crb` for 9/10) and runs Trivy.
+- Fedora: [.github/workflows/build-fedora.yml](.github/workflows/build-fedora.yml) builds the latest Fedora image and scans with Trivy.
 
-### GitHub Actions Workflow
+Artifacts are pushed to `ghcr.io/<owner>/devcontainer-rhelyeah:*`.
 
-The `.github/workflows/` directory contains the following workflows:
+## Pre-commit
 
-- `build-ubi.yml`: Builds and pushes Docker images for RHEL 8 and 9 to the GitHub Container Registry. Runs daily at 00:00 UTC.
-- `build-fedora.yml`: Builds and pushes Docker images for Fedora-based environments.
-- `build-rocky.yml`: Builds and pushes Docker images for Rocky Linux-based environments.
+Run pre-commit locally or inside the container to keep formatting and lint checks aligned:
 
-### Pre-commit Hooks
-
-The `.pre-commit-config.yaml` file configures pre-commit hooks to ensure code quality. It includes hooks for checking trailing whitespace, end-of-file fixes, YAML validation, and large file checks.
-
-## Usage
-
-To use this repository with GitHub Codespaces:
-
-1. Open the repository in GitHub Codespaces.
-2. The development container will be built and configured automatically.
-3. Start coding with the pre-configured environment.
+```sh
+pre-commit run -a
+```
 
 ## Notes
 
